@@ -1,0 +1,130 @@
+<!-- <!DOCTYPE html> -->
+<!-- <html xmlns:th="http://www.thymeleaf.org" lang="en"> -->
+<!-- <head th:fragment="site-head"> -->
+<!-- <meta charset="utf-8" /> -->
+<!-- <meta http-equiv="X-UA-Compatible" content="IE=edge" /> -->
+<!-- <meta name="viewport" content="width=device-width, initial-scale=1" /> -->
+<!-- <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags --> -->
+<!-- <meta name="description" content="" /> -->
+<!-- <meta name="author" content="" /> -->
+<!-- <link rel="icon" href="../public/img/favicon.ico" -->
+<!-- 	th:href="@{/img/favicon.ico}" /> -->
+
+<!-- <title>Signin Picture Management System</title> -->
+
+<!-- <link href="../public/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}" /> -->
+<!-- <link href="../public/css/layout.css" rel="stylesheet" th:href="@{/css/layout.css}" /> -->
+
+<!-- <script src="../public/js/jquery-3.1.1.js" th:src="@{/js/jquery-3.1.1.js}"></script> -->
+<!-- <script src="../public/js/bootstrap.js" th:src="@{/js/bootstrap.js}"></script> -->
+<!-- <script src="../public/js/pictures-scripts.js" th:src="@{/js/pictures-scripts.js}"></script> -->
+<!-- <script src="../public/js/layout.js" th:src="@{/js/layout.js}"></script> -->
+
+<!-- <meta th:include="this :: head" th:remove="tag" /> -->
+<!-- </head> -->
+
+<!-- <body> -->
+<!-- 	<!-- Fixed navbar --> -->
+<!-- 	<header th:fragment="site-header" th:remove="tag"> -->
+<!-- 		<div id="import-pictures-modal" class="modal fade" tabindex="-1" -->
+<!-- 			role="dialog"> -->
+<!-- 			<div class="modal-dialog" role="document"> -->
+<!-- 				<div class="modal-content"> -->
+<!-- 					<div class="modal-header"> -->
+<!-- 						<button type="button" class="close" data-dismiss="modal" -->
+<!-- 							aria-label="Close"> -->
+<!-- 							<span aria-hidden="true">&times;</span> -->
+<!-- 						</button> -->
+<!-- 						<h4 class="modal-title">Import Pictures</h4> -->
+<!-- 					</div> -->
+<!-- 					<form id="images-chose" class="modal-body form-horizontal"> -->
+<!-- 						<div class="input-group"> -->
+<!-- 							<label class="input-group-btn"> <span -->
+<!-- 								class="btn btn-info btn-lg"> Browse&hellip; <input -->
+<!-- 									id="file-input" name="files" type="file" style="display: none;" -->
+<!-- 									th:multiple="true" /> -->
+<!-- 							</span> -->
+<!-- 							</label> <input id="label-input" type="text" class="form-control" -->
+<!-- 								th:readonly="true" /> -->
+<!-- 						</div> -->
+<!-- 						<span class="help-block"> Try selecting one or more files -->
+<!-- 							and watch the feedback </span> -->
+<!-- 					</form> -->
+<!-- 					<div class="modal-footer"> -->
+<!-- 						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+<!-- 						<button type="button" class="btn btn-primary" id="start-import">Start -->
+<!-- 							Import</button> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 				/.modal-content -->
+<!-- 			</div> -->
+<!-- 			<!-- /.modal-dialog --> -->
+<!-- 		</div> -->
+<!-- 		<!-- /.modal --> -->
+
+<!-- 		<div id="predeined-modal" class="modal fade" tabindex="-1" -->
+<!-- 			role="dialog"> -->
+<!-- 			<div class="modal-dialog" role="document"> -->
+<!-- 				<div class="modal-content"> -->
+<!-- 					<div class="modal-header"> -->
+<!-- 						<button type="button" class="close" data-dismiss="modal" -->
+<!-- 							aria-label="Close"> -->
+<!-- 							<span aria-hidden="true">&times;</span> -->
+<!-- 						</button> -->
+<!-- 						<h4 class="modal-title">Create Person</h4> -->
+<!-- 					</div> -->
+<!-- 					<div id="person" class="modal-body form-horizontal"> -->
+<!-- 						<div class="form-group"> -->
+<!-- 							<label class="col-sm-4 control-label">Person's Image</label> -->
+<!-- 							<div class="col-sm-7"> -->
+<!-- 								<input type="file" class="form-control" ></input> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 						<div class="form-group"> -->
+<!-- 							<label class="col-sm-4 control-label">Person's Name</label> -->
+<!-- 							<div class="col-sm-7"> -->
+<!-- 								<input type="text" class="form-control" ></input> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 					<div class="modal-footer"> -->
+<!-- 						<button id="create-person" type="button" class="btn btn-primary">Create</button> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 				/.modal-content -->
+<!-- 			</div> -->
+<!-- 			<!-- /.modal-dialog --> -->
+<!-- 		</div> -->
+
+<!-- 		<nav class="navbar navbar-inverse navbar-fixed-top"> -->
+<!-- 			<div class="container"> -->
+<!-- 				<div class="navbar-header"> -->
+<!-- 					<button type="button" class="navbar-toggle collapsed" -->
+<!-- 						data-toggle="collapse" data-target="#navbar" aria-expanded="false" -->
+<!-- 						aria-controls="navbar"> -->
+<!-- 						<span class="sr-only">Toggle navigation</span> <span -->
+<!-- 							class="icon-bar"></span> <span class="icon-bar"></span> <span -->
+<!-- 							class="icon-bar"></span> -->
+<!-- 					</button> -->
+<!-- 					<a class="navbar-brand" href="index.html" th:href="@{/}">Picture -->
+<!-- 						Management</a> -->
+<!-- 				</div> -->
+<!-- 				<div id="navbar" class="navbar-collapse collapse"> -->
+<!-- 					<ul class="nav navbar-nav"> -->
+<!-- 						<li class="active"><a href="index.html" th:href="@{/}">Home</a></li> -->
+<!-- 					</ul> -->
+<!-- 					<div class="navbar-form navbar-right"> -->
+<!-- 						<button id="import-pictures" class="btn btn-primary">Import -->
+<!-- 							Pictures</button> -->
+<!-- 						<button id="define-person" class="btn btn-primary">Predefine</button> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 				/.nav-collapse -->
+<!-- 			</div> -->
+<!-- 		</nav> -->
+<!-- 	</header> -->
+
+<!-- 	<footer class="container" th:fragment="site-footer"> &copy; -->
+<!-- 		Spring MVC Picture System, 2017 </footer> -->
+<!-- </body> -->
+<!-- </html> -->

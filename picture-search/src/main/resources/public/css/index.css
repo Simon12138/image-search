@@ -1,0 +1,84 @@
+div > .search-txt {
+	width: 100%!important;
+	min-height: 60px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.form-control {
+	min-height: 50px;
+	height: 50px!important;
+	font-size: 18px!important;
+}
+
+.input-group-btn {
+	min-width: 2%!important;
+}
+.search-btn {
+	min-width: 100px;
+	min-height: 50px;
+	font-size: 18px;
+}
+.time-year-text {
+	width: 40%!important;
+}
+.time-month-text {
+	width: 25%!important;
+	margin-left: 5px;
+}
+.time-day-text {
+	width: 25%!important;
+	margin-left: 5px;
+}
+#images-title {
+	margin-left:10%;
+	margin-top: 30px;
+}
+#divider {
+	min-height: 2px;
+	background: #b9b3b3;
+	width: 80%;
+	margin-left: 10%;
+	margin-right: 10%;
+}
+.images-container {
+	margin-top: 30px!important;
+	margin-left:10%!important;
+	margin-right:10%!important;
+}
+
+#images-box {
+	max-width: 100%!important;
+	max-height: 150px!important;
+	min-height: 150px!important;
+}
+
+#modal-image-details {
+	max-width: 550px!important;
+	min-width: 550px!important;
+	max-height: 550px!important;
+	min-height: 550px!important;
+	display: block;
+	margin: 0 auto;
+}
+
+.picture-label {
+	font-size: 11px!important;
+}
+
+#group-time {
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-size: 16px;
+	color: #333;
+	font-weight: bold;
+}
+
+.hidden {
+	display: none;
+	visibility: hidden;
+}
+
+.show {
+	display: block;
+	visibility: visible;
+}

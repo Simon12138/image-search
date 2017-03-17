@@ -1,0 +1,35 @@
+body {
+  min-height: 2000px;
+  padding-top: 70px;
+}
+nav {
+	font-size: 16px!important;
+	padding: 5px!important;
+}
+.navbar-brand {
+	font-size: 20px!important;
+}
+
+#li-import-pictures {
+	height: 100%;
+}
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}

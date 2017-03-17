@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout :: site-head">
+<title>Picture Management</title>
+<link href="../public/css/index.css" rel="stylesheet" th:href="@{/css/index.css}" />
+<script th:inline="javascript" src="../public/js/index.js" th:src="@{/js/index.js}"></script>
+<script th:inline="javascript" src="../public/js/dateFormat.js" th:src="@{/js/dateFormat.js}"></script>
+</head>
+
+<body>
+	<header th:replace="layouttest :: site-header" />
+
+	<div id="specific-search-modal" class="modal fade" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title">Specific Search</h4>
+				</div>
+				<div class="modal-body form-horizontal">
+					<div class="form-group">
+						<label class="col-sm-2 control-label">WHAT</label>
+						<div class="col-sm-10">
+							<select class="form-control">
+								<option>Apple</option>
+								<option>Bicycle</option>
+								<option>Desktop</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">WHERE</label>
+						<div class="col-sm-10">
+							<select class="form-control">
+								<option>Home</option>
+								<option>School</option>
+								<option>Sushi Shop</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">WHEN</label>
+						<div class="col-sm-10">
+							<input type="text" class="time-year-text form-control col-sm-4" placeholder="2017(year)" />
+							<input type="text" class="time-month-text form-control col-sm-4" placeholder="11(month)" />
+							<input type="text" class="time-day-text form-control col-sm-4" placeholder="25(day)" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">WHO</label>
+						<div class="col-sm-10">
+							<select class="form-control">
+								<option>Simon Huang</option>
+								<option>Echo Liang</option>
+								<option>Xiao Baobao</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">SCREEN</label>
+						<div class="col-sm-10">
+							<select class="form-control">
+								<option>Mobile</option>
+								<option>Mirror</option>
+								<option>Computer</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">EMOTION</label>
+						<div class="col-sm-10">
+							<select class="form-control">
+								<option>Happy</option>
+								<option>Angry</option>
+								<option>Cry</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default btn-lg" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary btn-lg">Search</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
+
+
+	<div id="image-details-modal" class="modal fade" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="image-detail-container modal-body form-horizontal">
+					<div id="myCarousel" class="carousel slide" data-ride="carousel">
+						<div class="carousel-inner" role="listbox">
+							<div class="single-picture item active">
+								<img id="modal-image-details" src=""></img>
+							</div>
+						</div>
+
+						<!-- Left and right controls -->
+						<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+							<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+							<span class="sr-only">Previous</span>
+						</a>
+						<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+							<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+							<span class="sr-only">Next</span>
+						</a>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default btn-md" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="global-search" class="container">
+		<div class="col-lg-6 search-txt">
+			<div class="input-group">
+				<input type="text" class="form-control key-search" placeholder="Enter Any Keys to Search..." />
+				<span class="input-group-btn">
+					<button id="search" class="btn btn-default search-btn" type="button">Search</button>
+					<button id="specific-search" class="btn btn-default search-btn" type="button">Specific Search</button>
+				</span>
+			</div>
+		</div>
+	</div>
+	<div class="images-container">
+		<div class="images-container-row row" th:each="datedPicture : ${datedPictures}">
+			<h3 id="group-time" th:text="${'After ' + #dates.format(datedPicture.groupTime, 'yyyy-MM-dd HH:mm')}">time</h3>
+			<div class="col-md-2 col-sm-3 col-xs-5 all-images" th:each="picture : ${datedPicture.pictures}">
+				<a id="image-details" href="javascript:void(0);" class="thumbnail">
+					<img id="images-box" th:src="@{'/images/download/' + ${picture.id}}" />
+					<div class="picture-label caption">
+						<span class="label label-primary">Book</span> <span
+							class="label label-success">Huang Simon</span> <span
+							class="label label-info">Reading</span>
+					</div>
+				</a>
+			</div>
+		</div>
+	</div>
+
+	<footer th:replace="layouttest :: site-footer" />
+</body>
+</html>

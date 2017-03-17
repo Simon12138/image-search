@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout :: site-head">
+<title>Picture Management</title>
+<link href="../public/css/index.css" rel="stylesheet"
+	th:href="@{/css/index.css}" />
+</head>
+
+<body>
+	<header th:replace="layout :: site-header" />
+
+	<div id="specific-search-modal" class="modal fade" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title">Specific Search</h4>
+				</div>
+				<div class="modal-body form-horizontal">
+					<div class="form-group">
+						<label class="col-sm-2 control-label">WHAT</label>
+						<div class="col-sm-10">
+							<select class="form-control">
+								<option>Apple</option>
+								<option>Bicycle</option>
+								<option>Desktop</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">WHERE</label>
+						<div class="col-sm-10">
+							<select class="form-control">
+								<option>Home</option>
+								<option>School</option>
+								<option>Sushi Shop</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">WHEN</label>
+						<div class="col-sm-10">
+							<input type="text" class="time-year-text form-control col-sm-4" placeholder="2017(year)" />
+							<input type="text" class="time-month-text form-control col-sm-4" placeholder="11(month)" />
+							<input type="text" class="time-day-text form-control col-sm-4" placeholder="25(day)" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">WHO</label>
+						<div class="col-sm-10">
+							<select class="form-control">
+								<option>Simon Huang</option>
+								<option>Echo Liang</option>
+								<option>Xiao Baobao</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">SCREEN</label>
+						<div class="col-sm-10">
+							<select class="form-control">
+								<option>Mobile</option>
+								<option>Mirror</option>
+								<option>Computer</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">EMOTION</label>
+						<div class="col-sm-10">
+							<select class="form-control">
+								<option>Happy</option>
+								<option>Angry</option>
+								<option>Cry</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default btn-lg" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary btn-lg">Search</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
+
+
+	<div id="global-search" class="container">
+		<div class="col-lg-6 search-txt">
+			<div class="input-group">
+				<input type="text" class="form-control" placeholder="Enter Any Keys to Search..." />
+				<span class="input-group-btn">
+					<button id="search" class="btn btn-default search-btn" type="button">Search</button>
+					<button id="specific-search" class="btn btn-default search-btn" type="button">Specific Search</button>
+				</span>
+			</div>
+		</div>
+	</div>
+
+	<h3 id="images-title">Images Recent Viewed</h3>
+	<div id="divider"></div>
+	<div class="images-container row">
+		<div class="col-xs-6 col-md-3">
+			<a href="#" class="thumbnail">
+				<img id="images-box" src="../public/img/f.jpg" th:src="@{/img/f.jpg}" alt="..." />
+				<div class="caption">
+					<span class="label label-primary">Book</span>
+					<span class="label label-success">Huang Simon</span>
+					<span class="label label-info">Reading</span>
+				</div>
+			</a>
+		</div>
+		<div class="col-xs-6 col-md-3">
+			<a href="#" class="thumbnail">
+				<img id="images-box" src="../public/img/e.jpg" th:src="@{/img/e.jpg}" alt="..." />
+				<div class="caption">
+					<span class="label label-primary">Book</span>
+					<span class="label label-success">Huang Simon</span>
+					<span class="label label-info">Reading</span>
+				</div>
+			</a>
+		</div>
+		<div class="col-xs-6 col-md-3">
+			<a href="#" class="thumbnail">
+				<img id="images-box" src="../public/img/d.jpg" th:src="@{/img/d.jpg}" alt="..." />
+				<div class="caption">
+					<span class="label label-primary">Book</span>
+					<span class="label label-success">Huang Simon</span>
+					<span class="label label-info">Reading</span>
+				</div>
+			</a>
+		</div>
+		<div class="col-xs-6 col-md-3">
+			<a href="#" class="thumbnail">
+				<img id="images-box" src="../public/img/c.jpeg" th:src="@{/img/c.jpeg}" alt="..." />
+				<div class="caption">
+					<span class="label label-primary">Book</span>
+					<span class="label label-success">Huang Simon</span>
+					<span class="label label-info">Reading</span>
+				</div>
+			</a>
+		</div>
+		<div class="col-xs-6 col-md-3">
+			<a href="#" class="thumbnail">
+				<img id="images-box" src="../public/img/b.jpg" th:src="@{/img/b.jpg}" alt="..." />
+				<div class="caption">
+					<span class="label label-primary">Book</span>
+					<span class="label label-success">Huang Simon</span>
+					<span class="label label-info">Reading</span>
+				</div>
+			</a>
+		</div>
+		<div class="col-xs-6 col-md-3">
+			<a href="#" class="thumbnail">
+				<img id="images-box" src="../public/img/a.jpg" th:src="@{/img/a.jpg}" alt="..." />
+				<div class="caption">
+					<span class="label label-primary">Book</span>
+					<span class="label label-success">Huang Simon</span>
+					<span class="label label-info">Reading</span>
+				</div>
+			</a>
+		</div>
+	</div>
+
+	<footer th:replace="layout :: site-footer" />
+</body>
+</html>
