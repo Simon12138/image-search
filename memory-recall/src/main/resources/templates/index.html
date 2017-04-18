@@ -1,0 +1,103 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Memory Recall</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<link href="../public/css/semantic.css" rel="stylesheet" th:href="@{/css/semantic.css}" />
+<link href="../public/css/index.css" rel="stylesheet" th:href="@{/css/index.css}" />
+
+<script src="../public/js/jquery-3.2.0.js" th:src="@{/js/jquery-3.2.0.js}"></script>
+<script src="../public/js/semantic.js" th:src="@{/js/semantic.js}"></script>
+<script src="../public/js/index.js" th:src="@{/js/index.js}"></script>
+
+</head>
+<body>
+	<!-- Fixed Menu Bar -->
+	<div class="ui fixed inverted menu">
+		<div class="ui container navbar">
+			<a href="/" class="header item">
+				<img class="logo" src="../public/img/logo.png" th:src="@{/img/logo.png}"></img>Image Management
+			</a>
+			<a href="/" class="item">Home</a>
+		</div>
+	</div>
+	
+	<!-- modal start -->
+	<div class="ui modal small images">
+  		<div class="header">Related Pictures</div>
+  		<div class="content">
+  			<div class="ui tiny images">
+  				<img class="ui image card" src="../public/img/logo.png" th:src="@{/img/logo.png}"></img>
+  			</div>
+  		</div>
+  		<div class="description">
+  			<p>aaa</p>
+  		</div>
+  		<div class="actions">
+    		<div class="ui button pre">Pre</div>
+    		<div class="ui button blue next">Next</div>
+  		</div>
+	</div>
+	<!-- modal end -->
+	
+	<div class="ui main container segment import">
+		<form class="ui fluid center icon input import">
+  			<input type="file" name="files" style="display: none;" th:multiple="true"></input>
+  			<input type="text" placeholder="Please select pictures which you wanted to import..." th:readonly="true"></input>
+  			<div class="ui button blue import">Import</div>
+		</form>
+		<div class="divider"></div>
+		
+		<div class="ui grid recognization">
+			<div class="thirteen wide column"></div>
+			<div class="three wide column image cue">
+				<a class="ui orange tag label cues">Cues Combination</a>
+			</div>
+			<div class="thirteen wide column">
+				<a class="ui blue ribbon label module">Person Recognization</a>
+				<div class="ui tiny images module">
+  					<img class="ui image card avatars" th:each="avatar : ${avatars}" th:src="@{'/avatars/download/' + ${avatar.id}}"></img>
+  				</div>
+			</div>
+			<div class="three wide column image cue">
+				<img class="ui tiny rounded image person" src="../public/img/logo.png" th:src="@{/img/logo.png}"></img>
+			</div>
+			<div class="thirteen wide column">
+				<a class="ui blue ribbon label module">Object Recognization</a>
+				<div class="ui tiny images module">
+  					<img class="ui image card objects" th:each="object : ${objects}" th:src="@{'/objects/download/' + ${object.id}}" th:alt="@{${object.name}}"></img>
+  				</div>
+			</div>
+			<div class="three wide column image cue">
+				<img class="ui tiny rounded image object" src="../public/img/logo.png" th:src="@{/img/logo.png}"></img>
+			</div>
+			<div class="thirteen wide column">
+				<a class="ui blue ribbon label module">Location Recognization</a>
+				<div class="ui tiny images module">
+  					<img class="ui image card locations" th:each="location : ${locations}" th:src="@{'/locations/download/' + ${location.id}}" th:alt="@{${location.description}}"></img>
+  				</div>
+			</div>
+			<div class="three wide column image cue">
+				<img class="ui tiny rounded image location" src="../public/img/logo.png" th:src="@{/img/logo.png}"></img>
+			</div>
+			
+			<div class="thirteen wide column"></div>
+			<div class="three wide column image cue">
+				<div class="ui button blue query">Query</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Fixed Footer -->
+	<div class="ui inverted vertical footer segment">
+		<div class="ui center aligned container">
+			<img src="../public/img/logo.png" th:src="@{/img/logo.png}" class="ui centered mini image"></img>
+			<div class="ui horizontal inverted small divided link list">
+				<a class="item" href="/">If you have any problems, Please contact with us.</a>
+			</div>
+		</div>
+	</div>
+	
+</body>
+</html>
