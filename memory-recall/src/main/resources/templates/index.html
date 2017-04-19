@@ -60,8 +60,7 @@
   					<img class="ui image card avatars" th:each="avatar : ${avatars}" th:src="@{'/avatars/download/' + ${avatar.id}}"></img>
   				</div>
 			</div>
-			<div class="three wide column image cue">
-				<img class="ui tiny rounded image person" src="../public/img/logo.png" th:src="@{/img/logo.png}"></img>
+			<div class="three wide column image cue personcue">
 			</div>
 			<div class="thirteen wide column">
 				<a class="ui blue ribbon label module">Object Recognization</a>
@@ -69,8 +68,7 @@
   					<img class="ui image card objects" th:each="object : ${objects}" th:src="@{'/objects/download/' + ${object.id}}" th:alt="@{${object.name}}"></img>
   				</div>
 			</div>
-			<div class="three wide column image cue">
-				<img class="ui tiny rounded image object" src="../public/img/logo.png" th:src="@{/img/logo.png}"></img>
+			<div class="three wide column image cue objectcue">
 			</div>
 			<div class="thirteen wide column">
 				<a class="ui blue ribbon label module">Location Recognization</a>
@@ -78,8 +76,7 @@
   					<img class="ui image card locations" th:each="location : ${locations}" th:src="@{'/locations/download/' + ${location.id}}" th:alt="@{${location.description}}"></img>
   				</div>
 			</div>
-			<div class="three wide column image cue">
-				<img class="ui tiny rounded image location" src="../public/img/logo.png" th:src="@{/img/logo.png}"></img>
+			<div class="three wide column image cue locationcue">
 			</div>
 			
 			<div class="thirteen wide column"></div>

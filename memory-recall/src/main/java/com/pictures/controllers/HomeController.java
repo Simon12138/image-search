@@ -8,7 +8,6 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -20,12 +19,14 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -39,7 +40,7 @@ import com.google.maps.GeoApiContext;
 import com.google.maps.GeocodingApi;
 import com.google.maps.model.GeocodingResult;
 import com.google.maps.model.LatLng;
-import com.mysql.cj.fabric.xmlrpc.base.Array;
+import com.pictures.controllers.dto.QueryParam;
 import com.pictures.entity.Avatar;
 import com.pictures.entity.Location;
 import com.pictures.entity.Picture;
@@ -100,6 +101,13 @@ public class HomeController {
 		List<Location> locations = locationService.list();
 		model.addAttribute("locations", locations);
 		return "index";
+	}
+	
+	@RequestMapping(value="/images/query", method = RequestMethod.POST)
+	@ResponseBody
+	public HttpEntity<Picture[]> query(@RequestBody QueryParam queryParam) {
+		Picture[] pictures = pictureService.queryPicture(queryParam).toArray(new Picture[] {});
+		return new HttpEntity<Picture[]>(pictures);
 	}
 	
 	@RequestMapping(value="/images/download/{id}", method = RequestMethod.GET)
@@ -416,22 +424,5 @@ public class HomeController {
 			}
 		}
 		return tags;
-	}
-	
-	private byte[] getImageBytes(String path) {
-		byte[] result;
-		try {
-			InputStream in = new FileInputStream(path);
-			result = IOUtils.toByteArray(in);
-			HttpHeaders headers = new HttpHeaders();
-		    headers.setContentType(MediaType.IMAGE_JPEG);
-		    headers.setContentLength(result.length);
-		    return result;
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return new byte[0];
 	}
 }

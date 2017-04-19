@@ -2,6 +2,7 @@ package com.pictures.service;
 
 import java.util.List;
 
+import com.pictures.controllers.dto.QueryParam;
 import com.pictures.entity.Picture;
 
 public interface PictureService {
@@ -24,4 +25,5 @@ public interface PictureService {
 	
 	public List<Picture> getPicturesByObject(String object);
 	
+	public List<Picture> queryPicture(QueryParam param);
 }

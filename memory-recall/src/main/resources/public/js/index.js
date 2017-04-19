@@ -149,7 +149,8 @@ $(document).ready(function() {
 				clearTimeout(timeoutID);
 			    timeoutID = setTimeout(function() {
 			    	var url = $(that)[0].src;
-					$('.recognization > .cue > .person')[0].src = url;
+			    	$('.recognization > .cue.personcue').empty();
+			    	$('.recognization > .cue.personcue').append('<img class="ui tiny rounded image person" src="' + url + '"></img>');
 			    }, timeOut);
 			}
 		});
@@ -162,7 +163,8 @@ $(document).ready(function() {
 				clearTimeout(timeoutID);
 			    timeoutID = setTimeout(function() {
 			    	var url = $(that)[0].src;
-					$('.recognization > .cue > .object')[0].src = url;
+			    	$('.recognization > .cue.objectcue').empty();
+			    	$('.recognization > .cue.objectcue').append('<img class="ui tiny rounded image object" src="' + url + '"></img>');
 			    }, timeOut);
 			}
 		});
@@ -175,7 +177,8 @@ $(document).ready(function() {
 				clearTimeout(timeoutID);
 			    timeoutID = setTimeout(function() {
 			    	var url = $(that)[0].src;
-					$('.recognization > .cue > .location')[0].src = url;
+			    	$('.recognization > .cue.locationcue').empty();
+			    	$('.recognization > .cue.locationcue').append('<img class="ui tiny rounded image location" src="' + url + '"></img>');
 			    }, timeOut);
 			}
 		});
@@ -210,4 +213,39 @@ $(document).ready(function() {
 	function getIdFromUrl(url) {
 		return url.substring(url.lastIndexOf('/') + 1);
 	};
+	
+	$('.button.query').click(function() {
+		var faceImage = $('.image.cue > .image.person');
+		var faceId = faceImage.length === 0 ? null : getIdFromUrl(faceImage[0].src);
+		var objectImage = $('.image.cue > .image.object');
+		var objectId = objectImage.length === 0 ? null : getIdFromUrl(objectImage[0].src);
+		var locationImage = $('.image.cue > .image.location');
+		var locationId = locationImage.length === 0 ? null : getIdFromUrl(locationImage[0].src);
+		var data = {"faceId": faceId, "objectId": objectId, "locationId": locationId};
+		$.ajax({
+			url: '/images/query',
+			contentType: 'application/json; charset=utf-8',
+			data: JSON.stringify(data),
+			type: 'POST',
+			dataType: 'json',
+			success: function(data) {
+				var _pictures = data;
+				$('.modal.images').modal('show');
+				var imagesContainer = $('.modal.images > .content > .images');
+				var descriptionContainer = $('.modal.images > .description'); 
+				imagesContainer.empty();
+				descriptionContainer.empty();
+				for(var i = 0; i < _pictures.length; i++) {
+					imagesContainer.append('<img class="ui image card" src="/images/download/' + _pictures[i].id + '"></img>');
+					descriptionContainer.append('<div class="ui label datetime">' + _pictures[i].creationTimeString + '</p>');
+				}
+				var images = $('.modal.images > .content > .images > .image');
+				var descriptions = $('.modal.images > .description > div')
+				images.eq(0).show();
+				images.eq(0).siblings().hide();
+				descriptions.eq(0).show();
+				descriptions.eq(0).siblings().hide();
+			}
+		});
+	});
 });
