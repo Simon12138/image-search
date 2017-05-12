@@ -376,7 +376,7 @@ public class HomeController {
 			for (AddPersistedFaceResult persistedFace : persistedFaceResults) {
 				SimilarPersistedFace[] similarFaces = faceClient
 						.findSimilar(persistedFacesMap.get(persistedFace).faceId, SystemDataSet.FACE_LIST_ID, 2);
-				if (similarFaces.length < 2) {
+				if (similarFacesNotSoStrong(similarFaces)) {
 					Avatar avatar = new Avatar();
 					avatar.setName(persistedFace.persistedFaceId.toString() + picture.getName());
 					avatar.setUuid(persistedFace.persistedFaceId.toString());
@@ -388,6 +388,18 @@ public class HomeController {
 				}
 			}
 		}
+	}
+	
+	private boolean similarFacesNotSoStrong(SimilarPersistedFace[] similarFaces) {
+		if(similarFaces.length < 2) {
+			return true;
+		}
+		for(int i = 1; i < similarFaces.length; i++) {
+			if(similarFaces[i].confidence >= 0.8) {
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	private void handleObject(Picture picture, MultipartFile image) throws Exception {
