@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import com.pictures.entity.RealObject;
 import com.pictures.repository.RealObjectRepository;
 import com.pictures.service.RealObjectService;
+import com.pictures.utils.SystemDataSet;
 
 @Service
 @Primary
@@ -29,7 +30,7 @@ public class RealObjectServiceImpl implements RealObjectService {
 
 	@Override
 	public List<RealObject> list() {
-		return objectRepo.findAll();
+		return objectRepo.listUsingFilter(SystemDataSet.EXCLUDE_TAGS);
 	}
 
 	@Override
