@@ -1,6 +1,14 @@
 package com.pictures.controllers.dto;
 
+/*
+ * This parameter type is using for query images:
+ * faceId: Avatar image id
+ * objectId:Object image id
+ * locationId: Location image id
+ */
+
 public class QueryParam {
+	
 	private Long faceId;
 	
 	private Long objectId;
