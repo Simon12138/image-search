@@ -216,7 +216,9 @@ public class HomeController {
 			SimilarPersistedFace[] similarPersistedFaces = faceClient.findSimilar(faceId, SystemDataSet.FACE_LIST_ID, 1000);
 			List<String> faceUUIDs = new ArrayList<>();
 			for(SimilarPersistedFace face : similarPersistedFaces) {
-				faceUUIDs.add(face.persistedFaceId.toString());
+				if(face.confidence > 0.75) {
+					faceUUIDs.add(face.persistedFaceId.toString());
+				}
 			}
 			// load pictures using this similar faces UUID
 			List<Picture> pictures = pictureService.getPicturesByFaces(faceUUIDs);
