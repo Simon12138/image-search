@@ -19,7 +19,6 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -222,8 +221,7 @@ public class HomeController {
 			// load pictures using this similar faces UUID
 			List<Picture> pictures = pictureService.getPicturesByFaces(faceUUIDs);
 			return new HttpEntity<List<Picture>>(pictures);
-		} 
-		catch (ClientException e) {
+		} catch (ClientException e) {
 			logger.warn("Find similar faces failed: {0}", e);
 		} catch (IOException e) {
 			logger.warn("Find similar faces failed: {0}", e);

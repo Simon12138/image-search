@@ -31,6 +31,18 @@ $(document).ready(function() {
 		});
 	});
 	
+	$('.cue.personcue').click(function(event) {
+		$('.recognization > .cue.personcue').empty();
+	});
+	
+	$('.cue.objectcue').click(function(event) {
+		$('.recognization > .cue.objectcue').empty();
+	});
+	
+	$('.cue.locationcue').click(function(event) {
+		$('.recognization > .cue.locationcue').empty();
+	});
+	
 	$('.image.avatars').each(function(index){
 		$(this).dblclick(function(event) {
 			clearTimeout(timeoutID);
@@ -39,7 +51,11 @@ $(document).ready(function() {
 		      ignoreSingleClicks = false;
 		    }, timeOut);
 		    
-			$('.modal.images').modal('show');
+			$('.modal.images').modal({
+				onHide: function(value) {
+					$('.modal.images > .actions > .pre').css('visibility', 'hidden');
+				}
+			}).modal('show');
 			var avatarUrl = $(this)[0].src;
 			var id = getIdFromUrl(avatarUrl);
 			var imagesContainer = $('.modal.images > .content > .images');
@@ -52,6 +68,12 @@ $(document).ready(function() {
 				datatype: 'json',
 				success: function(data) {
 					var _pictures = data;
+					$('.modal.images > .actions > .pre').css('visibility', 'hidden');
+					if(_pictures.length == 1) {
+						$('.modal.images > .actions > .next').text('Close');
+					} else {
+						$('.modal.images > .actions > .next').text('Next');
+					}
 					for(var i = 0; i < _pictures.length; i++) {
 						imagesContainer.append('<img class="ui image card" src="/images/download/' + _pictures[i].id + 
 								'"></img>');
@@ -76,7 +98,11 @@ $(document).ready(function() {
 		      ignoreSingleClicks = false;
 		    }, timeOut);
 		    
-			$('.modal.images').modal('show');
+		    $('.modal.images').modal({
+				onHide: function(value) {
+					$('.modal.images > .actions > .pre').css('visibility', 'hidden');
+				}
+			}).modal('show');
 			var objectUrl = $(this)[0].src;
 			var id = getIdFromUrl(objectUrl);
 			var imagesContainer = $('.modal.images > .content > .images');
@@ -89,6 +115,12 @@ $(document).ready(function() {
 				datatype: 'json',
 				success: function(data) {
 					var _pictures = data;
+					$('.modal.images > .actions > .pre').css('visibility', 'hidden');
+					if(_pictures.length == 1) {
+						$('.modal.images > .actions > .next').text('Close');
+					} else {
+						$('.modal.images > .actions > .next').text('Next');
+					}
 					for(var i = 0; i < _pictures.length; i++) {
 						imagesContainer.append('<img class="ui image card" src="/images/download/' + _pictures[i].id + 
 								'"></img>');
@@ -113,7 +145,11 @@ $(document).ready(function() {
 		      ignoreSingleClicks = false;
 		    }, timeOut);
 		    
-			$('.modal.images').modal('show');
+		    $('.modal.images').modal({
+				onHide: function(value) {
+					$('.modal.images > .actions > .pre').css('visibility', 'hidden');
+				}
+			}).modal('show');
 			var objectUrl = $(this)[0].src;
 			var id = getIdFromUrl(objectUrl);
 			var imagesContainer = $('.modal.images > .content > .images');
@@ -126,6 +162,12 @@ $(document).ready(function() {
 				datatype: 'json',
 				success: function(data) {
 					var _pictures = data;
+					$('.modal.images > .actions > .pre').css('visibility', 'hidden');
+					if(_pictures.length == 1) {
+						$('.modal.images > .actions > .next').text('Close');
+					} else {
+						$('.modal.images > .actions > .next').text('Next');
+					}
 					for(var i = 0; i < _pictures.length; i++) {
 						imagesContainer.append('<img class="ui image card" src="/images/download/' + _pictures[i].id + 
 								'"></img>');
@@ -188,9 +230,12 @@ $(document).ready(function() {
 		var current = $('.modal.images > .content > .images > img:not([style="display: none;"])').index();
 		var images = $('.modal.images > .content > .images >.image');
 		var descriptions = $('.modal.images > .description > div');
-		if(current === 0) {
-			current = images.length;
+		if(current == 1) {
+			$('.modal.images > .actions > .pre').css('visibility', 'hidden');
+		} else {
+			$('.modal.images > .actions > .pre').css('visibility', 'visible');
 		}
+		$('.modal.images > .actions > .next').text('Next');
 		images.eq(current - 1).show();
 		images.eq(current - 1).siblings().hide();
 		descriptions.eq(current - 1).show();
@@ -201,8 +246,14 @@ $(document).ready(function() {
 		var current = $('.modal.images > .content > .images > img:not([style="display: none;"])').index();
 		var images = $('.modal.images > .content > .images >.image');
 		var descriptions = $('.modal.images > .description > div');
+		$('.modal.images > .actions > .pre').css('visibility', 'visible');
+		if(current >= images.length - 2) {
+			$('.modal.images > .actions > .next').text('Close');
+		} else {
+			$('.modal.images > .actions > .next').text('Next');
+		}
 		if(current === images.length - 1) {
-			current = -1;
+			$('.modal.images').modal('hide');
 		}
 		images.eq(current + 1).show();
 		images.eq(current + 1).siblings().hide();
@@ -230,7 +281,24 @@ $(document).ready(function() {
 			dataType: 'json',
 			success: function(data) {
 				var _pictures = data;
-				$('.modal.images').modal('show');
+				if(_pictures === undefined || _pictures.length === 0) {
+					$('.modal.error').modal('show');
+					return;
+				}
+				$('.modal.images').modal({
+					onHide: function(value) {
+						$('.recognization > .cue.personcue').empty();
+						$('.recognization > .cue.objectcue').empty();
+						$('.recognization > .cue.locationcue').empty();
+						$('.modal.images > .actions > .pre').css('visibility', 'hidden');
+					}
+				}).modal('show');
+				$('.modal.images > .actions > .pre').css('visibility', 'hidden');
+				if(_pictures.length == 1) {
+					$('.modal.images > .actions > .next').text('Close');
+				} else {
+					$('.modal.images > .actions > .next').text('Next');
+				}
 				var imagesContainer = $('.modal.images > .content > .images');
 				var descriptionContainer = $('.modal.images > .description'); 
 				imagesContainer.empty();
