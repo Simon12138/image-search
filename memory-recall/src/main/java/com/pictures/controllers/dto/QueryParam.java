@@ -17,9 +17,9 @@ public class QueryParam {
 	
 	private Long locationId;
 	
-	private Date startTime;
+	private Integer startHour;
 	
-	private Date endTime;
+	private Integer endHour;
 
 	public Long getFaceId() {
 		return faceId;
@@ -45,20 +45,20 @@ public class QueryParam {
 		this.locationId = locationId;
 	}
 
-	public Date getStartTime() {
-		return startTime;
+	public Integer getStartHour() {
+		return startHour;
 	}
 
-	public void setStartTime(Date startTime) {
-		this.startTime = startTime;
+	public void setStartHour(Integer startHour) {
+		this.startHour = startHour;
 	}
 
-	public Date getEndTime() {
-		return endTime;
+	public Integer getEndHour() {
+		return endHour;
 	}
 
-	public void setEndTime(Date endTime) {
-		this.endTime = endTime;
+	public void setEndHour(Integer endHour) {
+		this.endHour = endHour;
 	}
 	
 }

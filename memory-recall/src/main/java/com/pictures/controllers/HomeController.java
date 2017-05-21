@@ -313,6 +313,7 @@ public class HomeController {
 			Date date = df.parse(creationTime);
 			// set creation time for the picture
 			picture.setCreationTime(date);
+			picture.setCreationHour(date.getHours());
 		} catch (ParseException e) {
 			logger.warn("Date format is wrong: {0}", e);
 		}

@@ -281,21 +281,14 @@ $(document).ready(function() {
 			}).modal('show');
 			return;
 		}
-		var startMonth = $('.start.months > div.text').text() === 'Month' ? null : $('.start.months > div.text').text();
-		var startDay = $('.start.days > div.text').text() === 'Day' ? null : $('.start.days > div.text').text();
 		var startHour = $('.start.hours > div.text').text() === 'Hour' ? null : $('.start.hours > div.text').text();
-		var startTime = getDateTime(startMonth, startDay, startHour);
-		
-		var endMonth = $('.end.months > div.text').text() === 'Month' ? null : $('.end.months > div.text').text();
-		var endDay = $('.end.days > div.text').text() === 'Day' ? null : $('.end.days > div.text').text();
 		var endHour = $('.end.hours > div.text').text() === 'Hour' ? null : $('.end.hours > div.text').text();
-		var endTime = getDateTime(endMonth, endDay, endHour);
 		
-		if(startTime !== null && endTime !== null && startTime >= endTime) {
-			alert('End Time must be larger than Start Time.')
+		if(startHour !== null && endHour !== null && Number(startHour) > Number(endHour)) {
+			alert('End Time must be larger than or equal with Start Time.')
 			return;
 		}
-		var data = {"faceId": faceId, "objectId": objectId, "locationId": locationId, "startTime": startTime, "endTime": endTime};
+		var data = {"faceId": faceId, "objectId": objectId, "locationId": locationId, "startHour": startHour, "endHour": endHour};
 		$.ajax({
 			url: '/images/query',
 			contentType: 'application/json; charset=utf-8',
@@ -347,29 +340,13 @@ $(document).ready(function() {
 	    useLabels: true
 	});
 	
-	function getDaysInOneMonth(year, month){
-		month = parseInt(month, 10);
-		var d= new Date(year, month, 0);
-		return d.getDate();
-	};
-	
 	function resetCues() {
 		$('.recognization > .cue.personcue').empty();
 		$('.recognization > .cue.objectcue').empty();
 		$('.recognization > .cue.locationcue').empty();
 		$('.modal.images > .actions > .pre').css('visibility', 'hidden');
-
-		$('.ui.selection.dropdown.months > div.text').text('Month').addClass('default');
-		$('.ui.selection.dropdown.days > div.text').text('Day').addClass('default');
+		
 		$('.ui.selection.dropdown.hours > div.text').text('Hour').addClass('default');
 		$('.ui.selection.dropdown > div.menu > .item').removeClass('active').removeClass('selected')
 	};
-	
-	function getDateTime(month, day, hour) {
-		if(month !== null || day !== null || hour !== null) {
-			return new Date(2017, month === null ? 0 : month - 1, 
-					day === null ? 1 : day, hour === null ? 7 : hour, 0, 0);
-		}
-		return null;
-	}
 });

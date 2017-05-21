@@ -103,9 +103,8 @@ public class PictureServiceImpl implements PictureService {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Picture> queryPicture(QueryParam param) {
-		Calendar calendar = new GregorianCalendar(2016, 1, 1); 
-		Date startTime = param.getStartTime() == null ? calendar.getTime() : param.getStartTime();
-		Date endTime = param.getEndTime() == null ? Calendar.getInstance().getTime() : param.getEndTime();
+		int startHour = param.getStartHour() == null ? SystemDataSet.DEFAULT_START_HOUR : param.getStartHour();
+		int endHour = param.getEndHour() == null ? SystemDataSet.DEFAULT_END_HOUR : param.getEndHour();
 		List<String> faceUUIDs = new ArrayList<>();
 		if(param.getFaceId() != null) {
 			Avatar avatar = avatarService.findById(param.getFaceId());
@@ -130,7 +129,7 @@ public class PictureServiceImpl implements PictureService {
 				+ "(:faceId is null or pf.uuid in (:faceUUIDs)) and "
 				+ "(:objectName is null or po.name=:objectName) and "
 				+ "(:location is null or p.location=:location) and "
-				+ "(p.creationTime>:startTime and p.creationTime<:endTime)");
+				+ "(p.creationHour>=:startHour and p.creationHour<=:endHour)");
 		query.setParameter("faceId", param.getFaceId());
 		if(faceUUIDs.isEmpty()) {
 			query.setParameter("faceUUIDs", "''");
@@ -139,8 +138,8 @@ public class PictureServiceImpl implements PictureService {
 		}
 		query.setParameter("objectName", objectName);
 		query.setParameter("location", location);
-		query.setParameter("startTime", startTime);
-		query.setParameter("endTime", endTime);
+		query.setParameter("startHour", startHour);
+		query.setParameter("endHour", endHour);
 		List<Picture> pictures = query.getResultList();
 		return pictures;
 	}

@@ -30,6 +30,9 @@ public class Picture {
 	@Column(nullable = false)
 	private Date creationTime;
 	
+	@Column(nullable = false)
+	private int creationHour;
+	
 	@Transient
 	private String creationTimeString;
 	
@@ -72,6 +75,14 @@ public class Picture {
 		this.creationTime = creationTime;
 	}
 	
+	public int getCreationHour() {
+		return creationHour;
+	}
+
+	public void setCreationHour(int creationHour) {
+		this.creationHour = creationHour;
+	}
+
 	public String getCreationTimeString() {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		return format.format(creationTime);
