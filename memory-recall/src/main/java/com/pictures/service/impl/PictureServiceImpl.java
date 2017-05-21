@@ -2,6 +2,9 @@ package com.pictures.service.impl;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.UUID;
 
@@ -100,6 +103,9 @@ public class PictureServiceImpl implements PictureService {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Picture> queryPicture(QueryParam param) {
+		Calendar calendar = new GregorianCalendar(2016, 1, 1); 
+		Date startTime = param.getStartTime() == null ? calendar.getTime() : param.getStartTime();
+		Date endTime = param.getEndTime() == null ? Calendar.getInstance().getTime() : param.getEndTime();
 		List<String> faceUUIDs = new ArrayList<>();
 		if(param.getFaceId() != null) {
 			Avatar avatar = avatarService.findById(param.getFaceId());
@@ -108,7 +114,8 @@ public class PictureServiceImpl implements PictureService {
 				UUID faceId = faceClient.detect(avatarImage, true, false, null)[0].faceId;
 				SimilarPersistedFace[] similarPersistedFaces = faceClient.findSimilar(faceId, SystemDataSet.FACE_LIST_ID, 1000);
 				for(SimilarPersistedFace face : similarPersistedFaces) {
-					faceUUIDs.add(face.persistedFaceId.toString());
+					if(Double.compare(face.confidence, SystemDataSet.SIMILAR_FACE_CONFIDENCE_QUERY_PROCESS) > 0)
+						faceUUIDs.add(face.persistedFaceId.toString());
 				}
 			} catch (ClientException e) {
 				logger.warn("Find similar faces failed: {0}", e);
@@ -122,7 +129,8 @@ public class PictureServiceImpl implements PictureService {
 		Query query = em.createQuery("select distinct p from Picture p left join p.faces pf left join p.objects po where "
 				+ "(:faceId is null or pf.uuid in (:faceUUIDs)) and "
 				+ "(:objectName is null or po.name=:objectName) and "
-				+ "(:location is null or p.location=:location)");
+				+ "(:location is null or p.location=:location) and "
+				+ "(p.creationTime>:startTime and p.creationTime<:endTime)");
 		query.setParameter("faceId", param.getFaceId());
 		if(faceUUIDs.isEmpty()) {
 			query.setParameter("faceUUIDs", "''");
@@ -131,6 +139,8 @@ public class PictureServiceImpl implements PictureService {
 		}
 		query.setParameter("objectName", objectName);
 		query.setParameter("location", location);
+		query.setParameter("startTime", startTime);
+		query.setParameter("endTime", endTime);
 		List<Picture> pictures = query.getResultList();
 		return pictures;
 	}

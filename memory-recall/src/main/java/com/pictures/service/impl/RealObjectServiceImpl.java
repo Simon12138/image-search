@@ -30,7 +30,7 @@ public class RealObjectServiceImpl implements RealObjectService {
 
 	@Override
 	public List<RealObject> list() {
-		return objectRepo.listUsingFilter(SystemDataSet.EXCLUDE_TAGS);
+		return objectRepo.listUsingFilter();
 	}
 
 	@Override

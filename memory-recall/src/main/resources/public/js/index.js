@@ -272,7 +272,30 @@ $(document).ready(function() {
 		var objectId = objectImage.length === 0 ? null : getIdFromUrl(objectImage[0].src);
 		var locationImage = $('.image.cue > .image.location');
 		var locationId = locationImage.length === 0 ? null : getIdFromUrl(locationImage[0].src);
-		var data = {"faceId": faceId, "objectId": objectId, "locationId": locationId};
+		if(faceImage.length === 0 && objectImage.length === 0 && locationImage.length === 0) {
+			$('.modal.error > .content').text('You must choose a cue to query.');
+			$('.modal.error').modal({
+				onHide: function(value) {
+					resetCues();
+				}
+			}).modal('show');
+			return;
+		}
+		var startMonth = $('.start.months > div.text').text() === 'Month' ? null : $('.start.months > div.text').text();
+		var startDay = $('.start.days > div.text').text() === 'Day' ? null : $('.start.days > div.text').text();
+		var startHour = $('.start.hours > div.text').text() === 'Hour' ? null : $('.start.hours > div.text').text();
+		var startTime = getDateTime(startMonth, startDay, startHour);
+		
+		var endMonth = $('.end.months > div.text').text() === 'Month' ? null : $('.end.months > div.text').text();
+		var endDay = $('.end.days > div.text').text() === 'Day' ? null : $('.end.days > div.text').text();
+		var endHour = $('.end.hours > div.text').text() === 'Hour' ? null : $('.end.hours > div.text').text();
+		var endTime = getDateTime(endMonth, endDay, endHour);
+		
+		if(startTime !== null && endTime !== null && startTime >= endTime) {
+			alert('End Time must be larger than Start Time.')
+			return;
+		}
+		var data = {"faceId": faceId, "objectId": objectId, "locationId": locationId, "startTime": startTime, "endTime": endTime};
 		$.ajax({
 			url: '/images/query',
 			contentType: 'application/json; charset=utf-8',
@@ -282,15 +305,18 @@ $(document).ready(function() {
 			success: function(data) {
 				var _pictures = data;
 				if(_pictures === undefined || _pictures.length === 0) {
-					$('.modal.error').modal('show');
+					$('.modal.error > .content').text('There are no results for you! Please try other combination.');
+					$('.modal.error').modal({
+						onHide: function(value) {
+							resetCues();
+						}
+					}).modal('show');
 					return;
 				}
+				$('.modal.error > .content').text('There are no results for you! Please try other combination.');
 				$('.modal.images').modal({
 					onHide: function(value) {
-						$('.recognization > .cue.personcue').empty();
-						$('.recognization > .cue.objectcue').empty();
-						$('.recognization > .cue.locationcue').empty();
-						$('.modal.images > .actions > .pre').css('visibility', 'hidden');
+						resetCues();
 					}
 				}).modal('show');
 				$('.modal.images > .actions > .pre').css('visibility', 'hidden');
@@ -316,4 +342,34 @@ $(document).ready(function() {
 			}
 		});
 	});
+	
+	$('.ui.selection.dropdown').dropdown({
+	    useLabels: true
+	});
+	
+	function getDaysInOneMonth(year, month){
+		month = parseInt(month, 10);
+		var d= new Date(year, month, 0);
+		return d.getDate();
+	};
+	
+	function resetCues() {
+		$('.recognization > .cue.personcue').empty();
+		$('.recognization > .cue.objectcue').empty();
+		$('.recognization > .cue.locationcue').empty();
+		$('.modal.images > .actions > .pre').css('visibility', 'hidden');
+
+		$('.ui.selection.dropdown.months > div.text').text('Month').addClass('default');
+		$('.ui.selection.dropdown.days > div.text').text('Day').addClass('default');
+		$('.ui.selection.dropdown.hours > div.text').text('Hour').addClass('default');
+		$('.ui.selection.dropdown > div.menu > .item').removeClass('active').removeClass('selected')
+	};
+	
+	function getDateTime(month, day, hour) {
+		if(month !== null || day !== null || hour !== null) {
+			return new Date(2017, month === null ? 0 : month - 1, 
+					day === null ? 1 : day, hour === null ? 7 : hour, 0, 0);
+		}
+		return null;
+	}
 });

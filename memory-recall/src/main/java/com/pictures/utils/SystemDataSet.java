@@ -21,15 +21,15 @@ public class SystemDataSet {
 	
 	public final static String FACE_LIST_NAME = "MEMORYRECALL";
 	
+	public final static double SIMILAR_FACE_CONFIDENCE_IMPORT_PROCESS = 0.6;
+	
+	public final static double SIMILAR_FACE_CONFIDENCE_QUERY_PROCESS = 0.5;
+	
 	public final static double CONFIDENCE = 0.8;
 	
 	public final static double ZERO = 0.0;
 	
-	public final static List<String> EXCLUDE_TAGS = Arrays.asList(
-			"INDOOR", "OUTDOOR", "FOOD", "TRANS", "DRINK", "OBJECT", "ANIMAL", "TEXT",
-			"PLANT", "PEOPLE", "PERSON", "BUILDING", "STREET", "ABSTRACT", "OTHERS", "SCENE",
-			"DARK", "SKY", "CITY", "GROUP", "SHOW", "WALL", "ROOM", "LIVING", "FLOOR", "PARKED",
-			"GROUND", "ROAD");
+	public final static List<String> EXCLUDE_TAGS = Arrays.asList();
 	
 	public final static List<String> SCREEN_TAGS = Arrays.asList(
 			"ELECTRONICS");

@@ -17,7 +17,7 @@ public interface RealObjectRepository extends JpaRepository<RealObject, Long> {
 	@Query("select o from RealObject o where o.id=?1")
 	public RealObject findById(Long id);
 	
-	@Query("select o from RealObject o where o.name not in ?1")
-	public List<RealObject> listUsingFilter(List<String> objects);
+	@Query("select o from RealObject o")
+	public List<RealObject> listUsingFilter();
 	
 }

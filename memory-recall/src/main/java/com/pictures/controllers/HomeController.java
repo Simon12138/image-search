@@ -216,7 +216,7 @@ public class HomeController {
 			SimilarPersistedFace[] similarPersistedFaces = faceClient.findSimilar(faceId, SystemDataSet.FACE_LIST_ID, 1000);
 			List<String> faceUUIDs = new ArrayList<>();
 			for(SimilarPersistedFace face : similarPersistedFaces) {
-				if(face.confidence > 0.75) {
+				if(Double.compare(face.confidence, SystemDataSet.SIMILAR_FACE_CONFIDENCE_QUERY_PROCESS) > 0) {
 					faceUUIDs.add(face.persistedFaceId.toString());
 				}
 			}
@@ -450,7 +450,7 @@ public class HomeController {
 			return true;
 		}
 		for(int i = 1; i < similarFaces.length; i++) {
-			if(similarFaces[i].confidence >= 0.8) {
+			if(Double.compare(similarFaces[i].confidence, SystemDataSet.SIMILAR_FACE_CONFIDENCE_IMPORT_PROCESS) >= 0) {
 				return false;
 			}
 		}
@@ -474,10 +474,12 @@ public class HomeController {
 				object.setName(tag.getName());
 				object.setConfidence(tag.getConfidence());
 				object.setPictureName(picture.getName());
+				object.setParentTagsNumber(tagsInPicture.size());
 				objectService.create(object);
-			} else if (Double.compare(tag.getConfidence(), object.getConfidence()) > 0) {
+			} else if (tagsInPicture.size() < object.getParentTagsNumber() || Double.compare(tag.getConfidence(), object.getConfidence()) > 0) {
 				object.setConfidence(tag.getConfidence());
 				object.setPictureName(picture.getName());
+				object.setParentTagsNumber(tagsInPicture.size());
 				objectService.update(object);
 			}
 			PictureObject pictureObject = new PictureObject();

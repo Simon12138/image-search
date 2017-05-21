@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 
 import com.pictures.entity.Picture;
 
+import groovy.time.BaseDuration.From;
+
 @Repository
 public interface PictureRepository extends JpaRepository<Picture, Long> {
 	
@@ -28,5 +30,8 @@ public interface PictureRepository extends JpaRepository<Picture, Long> {
 	
 	@Query("select distinct p from Picture p join p.objects po where po.name=?1 order by p.creationTime")
 	public List<Picture> getPicturesByObject(String object);
+	
+	@Query("select p from Picture p order by p.creationTime")
+	public List<Picture> listPictureOrderByTime();
 
 }

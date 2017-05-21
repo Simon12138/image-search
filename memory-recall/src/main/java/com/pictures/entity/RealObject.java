@@ -23,6 +23,9 @@ public class RealObject {
 	
 	@Column
 	private String pictureName;
+	
+	@Column(nullable=false)
+	private Integer parentTagsNumber;
 
 	public Long getId() {
 		return id;
@@ -54,5 +57,13 @@ public class RealObject {
 
 	public void setPictureName(String pictureName) {
 		this.pictureName = pictureName;
+	}
+
+	public Integer getParentTagsNumber() {
+		return parentTagsNumber;
+	}
+
+	public void setParentTagsNumber(Integer parentTagsNumber) {
+		this.parentTagsNumber = parentTagsNumber;
 	}
 }
