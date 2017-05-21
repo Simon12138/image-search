@@ -23,6 +23,13 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 		</dependency>
+		
+		<!-- Enable Spring Boot Test -->
+		<dependency>
+		   <groupId>org.springframework.boot</groupId>
+		   <artifactId>spring-boot-starter-test</artifactId>
+		   <scope>test</scope>
+		</dependency>
 
 		<!-- Enable JPA management for project -->
 		<dependency>

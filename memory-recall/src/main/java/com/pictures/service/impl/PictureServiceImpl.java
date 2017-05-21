@@ -2,9 +2,6 @@ package com.pictures.service.impl;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.UUID;
 
@@ -103,8 +100,8 @@ public class PictureServiceImpl implements PictureService {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Picture> queryPicture(QueryParam param) {
-		int startHour = param.getStartHour() == null ? SystemDataSet.DEFAULT_START_HOUR : param.getStartHour();
-		int endHour = param.getEndHour() == null ? SystemDataSet.DEFAULT_END_HOUR : param.getEndHour();
+		Double startHour = param.getStartHour() == null ? SystemDataSet.DEFAULT_START_HOUR : param.getStartHour();
+		Double endHour = param.getEndHour() == null ? SystemDataSet.DEFAULT_END_HOUR : param.getEndHour();
 		List<String> faceUUIDs = new ArrayList<>();
 		if(param.getFaceId() != null) {
 			Avatar avatar = avatarService.findById(param.getFaceId());
@@ -129,7 +126,7 @@ public class PictureServiceImpl implements PictureService {
 				+ "(:faceId is null or pf.uuid in (:faceUUIDs)) and "
 				+ "(:objectName is null or po.name=:objectName) and "
 				+ "(:location is null or p.location=:location) and "
-				+ "(p.creationHour>=:startHour and p.creationHour<=:endHour)");
+				+ "(p.creationHour>=:startHour and p.creationHour<:endHour)");
 		query.setParameter("faceId", param.getFaceId());
 		if(faceUUIDs.isEmpty()) {
 			query.setParameter("faceUUIDs", "''");

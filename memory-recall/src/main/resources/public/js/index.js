@@ -281,10 +281,14 @@ $(document).ready(function() {
 			}).modal('show');
 			return;
 		}
-		var startHour = $('.start.hours > div.text').text() === 'Hour' ? null : $('.start.hours > div.text').text();
-		var endHour = $('.end.hours > div.text').text() === 'Hour' ? null : $('.end.hours > div.text').text();
-		
-		if(startHour !== null && endHour !== null && Number(startHour) > Number(endHour)) {
+		var hour = $('.dropdown.hours > div.text').text() === 'Hour' ? null : $('.dropdown.hours > div.text').text();
+		var startHour = null;
+		var endHour = null;
+		if(hour !== null) {
+			startHour = Number(hour) - 0.5;
+			endHour = Number(hour) + 0.5;
+		}
+		if(startHour !== null && endHour !== null && startHour > endHour) {
 			alert('End Time must be larger than or equal with Start Time.')
 			return;
 		}

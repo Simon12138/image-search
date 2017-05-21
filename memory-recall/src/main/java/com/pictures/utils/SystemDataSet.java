@@ -29,9 +29,9 @@ public class SystemDataSet {
 	
 	public final static double ZERO = 0.0;
 	
-	public final static int DEFAULT_START_HOUR = 0;
+	public final static Double DEFAULT_START_HOUR = 0.0;
 	
-	public final static int DEFAULT_END_HOUR = 24;
+	public final static Double DEFAULT_END_HOUR = 24.0;
 	
 	public final static List<String> EXCLUDE_TAGS = Arrays.asList();
 	

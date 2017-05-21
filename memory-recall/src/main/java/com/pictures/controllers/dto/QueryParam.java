@@ -1,7 +1,5 @@
 package com.pictures.controllers.dto;
 
-import java.util.Date;
-
 /*
  * This parameter type is using for query images:
  * faceId: Avatar image id
@@ -17,9 +15,9 @@ public class QueryParam {
 	
 	private Long locationId;
 	
-	private Integer startHour;
+	private Double startHour;
 	
-	private Integer endHour;
+	private Double endHour;
 
 	public Long getFaceId() {
 		return faceId;
@@ -45,19 +43,19 @@ public class QueryParam {
 		this.locationId = locationId;
 	}
 
-	public Integer getStartHour() {
+	public Double getStartHour() {
 		return startHour;
 	}
 
-	public void setStartHour(Integer startHour) {
+	public void setStartHour(Double startHour) {
 		this.startHour = startHour;
 	}
 
-	public Integer getEndHour() {
+	public Double getEndHour() {
 		return endHour;
 	}
 
-	public void setEndHour(Integer endHour) {
+	public void setEndHour(Double endHour) {
 		this.endHour = endHour;
 	}
 	

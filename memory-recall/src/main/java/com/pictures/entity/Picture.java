@@ -31,7 +31,7 @@ public class Picture {
 	private Date creationTime;
 	
 	@Column(nullable = false)
-	private int creationHour;
+	private double creationHour;
 	
 	@Transient
 	private String creationTimeString;
@@ -75,11 +75,11 @@ public class Picture {
 		this.creationTime = creationTime;
 	}
 	
-	public int getCreationHour() {
+	public double getCreationHour() {
 		return creationHour;
 	}
 
-	public void setCreationHour(int creationHour) {
+	public void setCreationHour(double creationHour) {
 		this.creationHour = creationHour;
 	}
 
