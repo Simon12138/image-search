@@ -78,8 +78,15 @@ public class PictureServiceImpl implements PictureService {
 		return pictureRepo.saveAndFlush(picture);
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Picture> getPicturesByFaces(List<String> faceIds) {
-		return pictureRepo.getPicturesByFaces(faceIds);
+		Query query = em.createQuery("select distinct p from Picture p join p.faces pf where pf.uuid in :faceIds order by p.creationTime");
+		if(faceIds.isEmpty()) {
+			query.setParameter("faceIds", "''");
+		} else {
+			query.setParameter("faceIds", faceIds);
+		}
+		return query.getResultList();
 	}
 
 	@Override

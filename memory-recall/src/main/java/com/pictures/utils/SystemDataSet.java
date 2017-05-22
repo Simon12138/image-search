@@ -17,15 +17,15 @@ public class SystemDataSet {
 	
 	public final static String MICROSOFT_FACE_SECRET_ID = "bab529ddc62e49208e7766ef41a9b5c5";
 	
-	public final static String FACE_LIST_ID = "20131203_3";
+	public final static String FACE_LIST_ID = "20131203_6";
 	
 	public final static String FACE_LIST_NAME = "MEMORYRECALL";
 	
-	public final static double SIMILAR_FACE_CONFIDENCE_IMPORT_PROCESS = 0.6;
+	public final static double SIMILAR_FACE_CONFIDENCE_IMPORT_PROCESS = 0.7;
 	
 	public final static double SIMILAR_FACE_CONFIDENCE_QUERY_PROCESS = 0.5;
 	
-	public final static double CONFIDENCE = 0.8;
+	public final static double CONFIDENCE = 0.0;
 	
 	public final static double ZERO = 0.0;
 	

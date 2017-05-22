@@ -16,6 +16,7 @@ import java.util.UUID;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
+import org.hibernate.id.UUIDGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -211,9 +212,13 @@ public class HomeController {
 			// load avatar images from folder
 			byte [] avatarImage = ImageUtils.loadImage(SystemDataSet.AVATAR_SAVED_LOCATION + avatar.getName());
 			// detect the avatar image and get the face UUID
-			UUID faceId = faceClient.detect(avatarImage, true, false, null)[0].faceId;
+			Face[] faces = faceClient.detect(avatarImage, true, false, null);
+			UUID faceId = null;
+			if(faces.length != 0) {
+				faceId = faceClient.detect(avatarImage, true, false, null)[0].faceId;
+			}
 			// Using the face UUID find the similar faces in our face list and get the similar face UUIS
-			SimilarPersistedFace[] similarPersistedFaces = faceClient.findSimilar(faceId, SystemDataSet.FACE_LIST_ID, 1000);
+			SimilarPersistedFace[] similarPersistedFaces = faceId == null ? new SimilarPersistedFace[0] : faceClient.findSimilar(faceId, SystemDataSet.FACE_LIST_ID, 1000);
 			List<String> faceUUIDs = new ArrayList<>();
 			for(SimilarPersistedFace face : similarPersistedFaces) {
 				if(Double.compare(face.confidence, SystemDataSet.SIMILAR_FACE_CONFIDENCE_QUERY_PROCESS) > 0) {

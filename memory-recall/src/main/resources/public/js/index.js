@@ -52,24 +52,32 @@ $(document).ready(function() {
 		    setTimeout(function() {
 		      ignoreSingleClicks = false;
 		    }, timeOut);
-		    
-			$('.modal.images').modal({
-				onHide: function(value) {
-					$('.modal.images > .actions > .pre').css('visibility', 'hidden');
-				}
-			}).modal('show');
 			var avatarUrl = $(this)[0].src;
 			var id = getIdFromUrl(avatarUrl);
-			var imagesContainer = $('.modal.images > .content > .images');
-			var descriptionContainer = $('.modal.images > .description'); 
-			imagesContainer.empty();
-			descriptionContainer.empty();
 			$.ajax({
 				type: 'GET',
 				url: '/avatars/' + id + '/images',
 				datatype: 'json',
 				success: function(data) {
 					var _pictures = data;
+					if(_pictures === undefined || _pictures.length === 0) {
+						$('.modal.error > .content').text('There are no results for you!');
+						$('.modal.error').modal({
+							onHide: function(value) {
+								resetCues();
+							}
+						}).modal('show');
+						return;
+					}
+					$('.modal.images').modal({
+						onHide: function(value) {
+							$('.modal.images > .actions > .pre').css('visibility', 'hidden');
+						}
+					}).modal('show');
+					var imagesContainer = $('.modal.images > .content > .images');
+					var descriptionContainer = $('.modal.images > .description'); 
+					imagesContainer.empty();
+					descriptionContainer.empty();
 					$('.modal.images > .actions > .pre').css('visibility', 'hidden');
 					if(_pictures.length == 1) {
 						$('.modal.images > .actions > .next').text('Close');
@@ -99,24 +107,32 @@ $(document).ready(function() {
 		    setTimeout(function() {
 		      ignoreSingleClicks = false;
 		    }, timeOut);
-		    
-		    $('.modal.images').modal({
-				onHide: function(value) {
-					$('.modal.images > .actions > .pre').css('visibility', 'hidden');
-				}
-			}).modal('show');
 			var objectUrl = $(this)[0].src;
 			var id = getIdFromUrl(objectUrl);
-			var imagesContainer = $('.modal.images > .content > .images');
-			var descriptionContainer = $('.modal.images > .description'); 
-			imagesContainer.empty();
-			descriptionContainer.empty();
 			$.ajax({
 				type: 'GET',
 				url: '/objects/' + id + '/images',
 				datatype: 'json',
 				success: function(data) {
 					var _pictures = data;
+					if(_pictures === undefined || _pictures.length === 0) {
+						$('.modal.error > .content').text('There are no results for you!');
+						$('.modal.error').modal({
+							onHide: function(value) {
+								resetCues();
+							}
+						}).modal('show');
+						return;
+					}
+				    $('.modal.images').modal({
+						onHide: function(value) {
+							$('.modal.images > .actions > .pre').css('visibility', 'hidden');
+						}
+					}).modal('show');
+					var imagesContainer = $('.modal.images > .content > .images');
+					var descriptionContainer = $('.modal.images > .description'); 
+					imagesContainer.empty();
+					descriptionContainer.empty();
 					$('.modal.images > .actions > .pre').css('visibility', 'hidden');
 					if(_pictures.length == 1) {
 						$('.modal.images > .actions > .next').text('Close');
@@ -146,24 +162,32 @@ $(document).ready(function() {
 		    setTimeout(function() {
 		      ignoreSingleClicks = false;
 		    }, timeOut);
-		    
-		    $('.modal.images').modal({
-				onHide: function(value) {
-					$('.modal.images > .actions > .pre').css('visibility', 'hidden');
-				}
-			}).modal('show');
 			var objectUrl = $(this)[0].src;
 			var id = getIdFromUrl(objectUrl);
-			var imagesContainer = $('.modal.images > .content > .images');
-			var descriptionContainer = $('.modal.images > .description'); 
-			imagesContainer.empty();
-			descriptionContainer.empty();
 			$.ajax({
 				type: 'GET',
 				url: '/locations/' + id + '/images',
 				datatype: 'json',
 				success: function(data) {
 					var _pictures = data;
+					if(_pictures === undefined || _pictures.length === 0) {
+						$('.modal.error > .content').text('There are no results for you!');
+						$('.modal.error').modal({
+							onHide: function(value) {
+								resetCues();
+							}
+						}).modal('show');
+						return;
+					}
+				    $('.modal.images').modal({
+						onHide: function(value) {
+							$('.modal.images > .actions > .pre').css('visibility', 'hidden');
+						}
+					}).modal('show');
+					var imagesContainer = $('.modal.images > .content > .images');
+					var descriptionContainer = $('.modal.images > .description'); 
+					imagesContainer.empty();
+					descriptionContainer.empty();
 					$('.modal.images > .actions > .pre').css('visibility', 'hidden');
 					if(_pictures.length == 1) {
 						$('.modal.images > .actions > .next').text('Close');
