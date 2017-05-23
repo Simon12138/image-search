@@ -118,3 +118,13 @@
 .thirteen.creationtime > .buttons {
 	margin-top: 10px!important;
 }
+
+.ui.image.card.objects {
+	width: 100px!important;
+	height: 100px!important;	
+}
+
+.ui.tiny.rounded.image.object {
+	width: 100px!important;
+	height: 100px!important;	
+}

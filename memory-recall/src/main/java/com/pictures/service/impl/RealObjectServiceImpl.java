@@ -12,6 +12,10 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import com.pictures.entity.RealObject;
+import com.pictures.projectoxford.bing.BingImageSearchClient;
+import com.pictures.projectoxford.bing.BingImageSearchException;
+import com.pictures.projectoxford.bing.model.BingImageSearchRequest;
+import com.pictures.projectoxford.bing.model.BingImageSearchResponse;
 import com.pictures.repository.RealObjectRepository;
 import com.pictures.service.RealObjectService;
 import com.pictures.utils.SystemDataSet;
@@ -23,6 +27,9 @@ public class RealObjectServiceImpl implements RealObjectService {
 	@Autowired
 	private RealObjectRepository objectRepo;
 	
+	@Autowired
+	private BingImageSearchClient searchClient;
+	
 	@Override
 	public RealObject create(RealObject object) {
 		return objectRepo.save(object);
@@ -30,7 +37,7 @@ public class RealObjectServiceImpl implements RealObjectService {
 
 	@Override
 	public List<RealObject> list() {
-		return objectRepo.listUsingFilter();
+		return objectRepo.listUsingFilter(SystemDataSet.REAL_OBJECT_CONFIDENCE_TO_SHOW);
 	}
 
 	@Override
@@ -68,6 +75,25 @@ public class RealObjectServiceImpl implements RealObjectService {
 	@Override
 	public RealObject findById(Long id) {
 		return objectRepo.findById(id);
+	}
+
+	@Override
+	public List<RealObject> listAll() {
+		return objectRepo.findAll();
+	}
+	
+	
+	public String searchObjectImage(String objectName) {
+		BingImageSearchRequest request = new BingImageSearchRequest();
+		request.keyword.set(objectName)
+			.offset.set(0).count.set(2).mkt.set("en_US").safeSearch.set("Moderate").size.set("Large");
+		try {
+			BingImageSearchResponse response = searchClient.searchImage(request);
+			return response.value.get(0).thumbnailUrl;
+		} catch (BingImageSearchException e) {
+			e.printStackTrace();
+		}
+		return "";
 	}
 
 }

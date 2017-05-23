@@ -26,6 +26,9 @@ public class RealObject {
 	
 	@Column(nullable=false)
 	private Integer parentTagsNumber;
+	
+	@Column
+	private String bingImageUrl;
 
 	public Long getId() {
 		return id;
@@ -66,4 +69,13 @@ public class RealObject {
 	public void setParentTagsNumber(Integer parentTagsNumber) {
 		this.parentTagsNumber = parentTagsNumber;
 	}
+
+	public String getBingImageUrl() {
+		return bingImageUrl;
+	}
+
+	public void setBingImageUrl(String bingImageUrl) {
+		this.bingImageUrl = bingImageUrl;
+	}
+	
 }

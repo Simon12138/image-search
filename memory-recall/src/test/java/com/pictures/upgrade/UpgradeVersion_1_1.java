@@ -20,6 +20,7 @@ public class UpgradeVersion_1_1 extends UpgradeBase {
 	@Autowired
 	private RealObjectService objectService;
 	
+	@SuppressWarnings("deprecation")
 	@Test
 	public void upgrade() {
 		List<Picture> pictures = pictureService.list();

@@ -16,7 +16,6 @@ import java.util.UUID;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
-import org.hibernate.id.UUIDGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -482,6 +481,8 @@ public class HomeController {
 				object.setConfidence(tag.getConfidence());
 				object.setPictureName(picture.getName());
 				object.setParentTagsNumber(tagsInPicture.size());
+				String objectImageUrl = objectService.searchObjectImage(tag.getName());
+				object.setBingImageUrl(objectImageUrl);
 				objectService.create(object);
 			} else if (tagsInPicture.size() < object.getParentTagsNumber() || Double.compare(tag.getConfidence(), object.getConfidence()) > 0) {
 				object.setConfidence(tag.getConfidence());

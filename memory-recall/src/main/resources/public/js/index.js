@@ -107,7 +107,7 @@ $(document).ready(function() {
 		    setTimeout(function() {
 		      ignoreSingleClicks = false;
 		    }, timeOut);
-			var objectUrl = $(this)[0].src;
+			var objectUrl = $(this)[0].alt;
 			var id = getIdFromUrl(objectUrl);
 			$.ajax({
 				type: 'GET',
@@ -162,8 +162,8 @@ $(document).ready(function() {
 		    setTimeout(function() {
 		      ignoreSingleClicks = false;
 		    }, timeOut);
-			var objectUrl = $(this)[0].src;
-			var id = getIdFromUrl(objectUrl);
+			var locationUrl = $(this)[0].src;
+			var id = getIdFromUrl(locationUrl);
 			$.ajax({
 				type: 'GET',
 				url: '/locations/' + id + '/images',
@@ -231,8 +231,10 @@ $(document).ready(function() {
 				clearTimeout(timeoutID);
 			    timeoutID = setTimeout(function() {
 			    	var url = $(that)[0].src;
+			    	var alt = $(that)[0].alt;
 			    	$('.recognization > .cue.objectcue').empty();
-			    	$('.recognization > .cue.objectcue').append('<img class="ui tiny rounded image object" src="' + url + '"></img>');
+			    	$('.recognization > .cue.objectcue').append('<img class="ui tiny rounded image object" src="' + 
+			    			url + '" alt="' + alt + '"></img>');
 			    }, timeOut);
 			}
 		});
@@ -310,7 +312,7 @@ $(document).ready(function() {
 		var faceImage = $('.image.cue > .image.person');
 		var faceId = faceImage.length === 0 ? null : getIdFromUrl(faceImage[0].src);
 		var objectImage = $('.image.cue > .image.object');
-		var objectId = objectImage.length === 0 ? null : getIdFromUrl(objectImage[0].src);
+		var objectId = objectImage.length === 0 ? null : getIdFromUrl(objectImage[0].alt);
 		var locationImage = $('.image.cue > .image.location');
 		var locationId = locationImage.length === 0 ? null : getIdFromUrl(locationImage[0].src);
 		if(faceImage.length === 0 && objectImage.length === 0 && locationImage.length === 0) {

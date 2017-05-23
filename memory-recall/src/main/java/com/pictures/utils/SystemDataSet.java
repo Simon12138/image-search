@@ -17,6 +17,8 @@ public class SystemDataSet {
 	
 	public final static String MICROSOFT_FACE_SECRET_ID = "bab529ddc62e49208e7766ef41a9b5c5";
 	
+	public final static String MICROSOFT_BING_SECRET_ID = "6825fc9f818444bd8ca9b4eb9aa53c7e";
+	
 	public final static String FACE_LIST_ID = "20131203_6";
 	
 	public final static String FACE_LIST_NAME = "MEMORYRECALL";
@@ -26,6 +28,8 @@ public class SystemDataSet {
 	public final static double SIMILAR_FACE_CONFIDENCE_QUERY_PROCESS = 0.5;
 	
 	public final static double CONFIDENCE = 0.0;
+	
+	public final static double REAL_OBJECT_CONFIDENCE_TO_SHOW = 0.6;
 	
 	public final static double ZERO = 0.0;
 	

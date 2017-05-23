@@ -8,8 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import com.pictures.entity.Picture;
 
-import groovy.time.BaseDuration.From;
-
 @Repository
 public interface PictureRepository extends JpaRepository<Picture, Long> {
 	

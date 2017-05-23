@@ -64,7 +64,7 @@
 			<div class="thirteen wide column">
 				<a class="ui blue ribbon label module">Object Recognization</a>
 				<div class="ui tiny images module">
-  					<img th:title="@{${object.name}}" class="ui image card objects" th:each="object : ${objects}" th:src="@{'/objects/download/' + ${object.id}}" th:alt="@{${object.name}}"></img>
+  					<img th:title="@{${object.name}}" class="ui image card objects" th:each="object : ${objects}" th:src="@{${object.bingImageUrl}}" th:alt="@{'/objects/download/' + ${object.id}}"></img>
   				</div>
 			</div>
 			<div class="three wide column image cue objectcue">

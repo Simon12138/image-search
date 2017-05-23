@@ -9,6 +9,8 @@ public interface RealObjectService {
 	
 	public List<RealObject> list();
 	
+	public List<RealObject> listAll();
+	
 	public RealObject findByName(String name);
 	
 	public RealObject findById(Long id);
@@ -16,4 +18,6 @@ public interface RealObjectService {
 	public RealObject update(RealObject object);
 	
 	public List<RealObject> listObjects();
+	
+	public String searchObjectImage(String objectName);
 }
