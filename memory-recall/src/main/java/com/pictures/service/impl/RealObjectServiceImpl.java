@@ -86,7 +86,7 @@ public class RealObjectServiceImpl implements RealObjectService {
 	public String searchObjectImage(String objectName) {
 		BingImageSearchRequest request = new BingImageSearchRequest();
 		request.keyword.set(objectName)
-			.offset.set(0).count.set(2).mkt.set("en_US").safeSearch.set("Moderate").size.set("Large");
+			.offset.set(0).count.set(2).mkt.set("en_US").safeSearch.set("Strict").size.set("Large");
 		try {
 			BingImageSearchResponse response = searchClient.searchImage(request);
 			return response.value.get(0).thumbnailUrl;
