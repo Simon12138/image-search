@@ -36,10 +36,10 @@ $(document).ready(function() {
 	$('.cue.personcue').click(function(event) {
 		$('.recognization > .cue.personcue').empty();
 	});
-	
-	$('.cue.objectcue').click(function(event) {
-		$('.recognization > .cue.objectcue').empty();
-	});
+//	
+//	$('.cue.objectcue').click(function(event) {
+//		$('.recognization > .cue.objectcue').empty();
+//	});
 	
 	$('.cue.locationcue').click(function(event) {
 		$('.recognization > .cue.locationcue').empty();
@@ -230,11 +230,21 @@ $(document).ready(function() {
 			if (!ignoreSingleClicks) {
 				clearTimeout(timeoutID);
 			    timeoutID = setTimeout(function() {
+			    	var objectCuesDiv = $('.rounded.image.object');
+			    	var objectImages = new Array();
+			    	for(var i = 0; i < objectCuesDiv.length; i++) {
+			    		objectImages.push(objectCuesDiv[i].alt);
+			    	}
 			    	var url = $(that)[0].src;
 			    	var alt = $(that)[0].alt;
-			    	$('.recognization > .cue.objectcue').empty();
-			    	$('.recognization > .cue.objectcue').append('<img class="ui tiny rounded image object" src="' + 
-			    			url + '" alt="' + alt + '"></img>');
+			    	if(!contains(objectImages, alt)) {
+			    		$('.recognization > .cue.objectcue').append('<img class="rounded image object" src="' + 
+				    			url + '" alt="' + alt + '"></img>').children().each(function(index) {
+				    				$(this).click(function() {
+				    					$(this).remove();
+				    				});
+				    			});
+			    	}
 			    }, timeOut);
 			}
 		});
@@ -254,18 +264,23 @@ $(document).ready(function() {
 		});
 	});
 	
-	$('.thirteen.creationtime > .buttons > .button').each(function(index) {
+	$('.creationtime > .buttons > .button').each(function(index) {
 		$(this).click(function() {
 			var that = this;
-			if($(that).attr('class').indexOf('blue') != -1) {
-				$('.thirteen.creationtime > .buttons > .button').removeClass('blue');
-				$(that).removeClass('blue');
-				creationTime = null;
-			} else {
-				$('.thirteen.creationtime > .buttons > .button').removeClass('blue');
-				$(that).addClass('blue');
-				creationTime = Number($(that).attr('id'));
+			$(that).addClass('blue');
+			var times = $('.ui.label.creationtime');
+			for(var i = 0; i < times.length; i++) {
+				if(times.eq(i).text() === $(that).text()) {
+					return;
+				}
 			}
+			$('.ui.labels.creationtime').append('<a id="' + $(that).attr('id') + '" class="ui label creationtime">' + $(that).text()+ '</a>')
+				.children().each(function(index) {
+					$(this).click(function() {
+						$(this).remove();
+						$('.creationtime > .buttons > .button:contains("' + $(this).text() + '")').removeClass('blue');
+					});
+				});
 		});
 	});
 	
@@ -309,13 +324,34 @@ $(document).ready(function() {
 	};
 	
 	$('.button.query').click(function() {
+		var objects = new Array();
+		var persons = new Array();
+		var locations = new Array();
+		var times = new Array();
+		
+		var imagesContainers = $('.ui.images.cue.objectcue > .rounded.object');
+		for(var i = 0; i < imagesContainers.length; i++) {
+			objects.push(getIdFromUrl(imagesContainers[i].alt));
+		}
+		
 		var faceImage = $('.image.cue > .image.person');
 		var faceId = faceImage.length === 0 ? null : getIdFromUrl(faceImage[0].src);
-		var objectImage = $('.image.cue > .image.object');
-		var objectId = objectImage.length === 0 ? null : getIdFromUrl(objectImage[0].alt);
+		if(faceId !== null) {
+			persons.push(faceId);
+		}
+		
 		var locationImage = $('.image.cue > .image.location');
 		var locationId = locationImage.length === 0 ? null : getIdFromUrl(locationImage[0].src);
-		if(faceImage.length === 0 && objectImage.length === 0 && locationImage.length === 0) {
+		if(locationId !== null) {
+			locations.push(locationId);
+		}
+		
+		var creationTimes = $('.ui.labels.creationtime > .creationtime');
+		for(var i = 0; i < creationTimes.length; i++) {
+			times.push(creationTimes.eq(i).attr('id'));
+		}
+		
+		if(objects.length === 0 && persons.length === 0 && locationImage.length === 0) {
 			$('.modal.error > .content').text('You must choose a cue to query.');
 			$('.modal.error').modal({
 				onHide: function(value) {
@@ -324,18 +360,8 @@ $(document).ready(function() {
 			}).modal('show');
 			return;
 		}
-		var hour = creationTime;
-		var startHour = null;
-		var endHour = null;
-		if(hour !== null) {
-			startHour = Number(hour) - 0.5;
-			endHour = Number(hour) + 0.5;
-		}
-		if(startHour !== null && endHour !== null && startHour > endHour) {
-			alert('End Time must be larger than or equal with Start Time.')
-			return;
-		}
-		var data = {"faceId": faceId, "objectId": objectId, "locationId": locationId, "startHour": startHour, "endHour": endHour};
+		
+		var data = {"faceIds": persons, "objectIds": objects, "locationIds": locations, "times": times};
 		$.ajax({
 			url: '/images/query',
 			contentType: 'application/json; charset=utf-8',
@@ -391,8 +417,18 @@ $(document).ready(function() {
 		$('.recognization > .cue.personcue').empty();
 		$('.recognization > .cue.objectcue').empty();
 		$('.recognization > .cue.locationcue').empty();
+		$('.recognization > .cue.creationtime > .labels.creationtime').empty();
 		$('.modal.images > .actions > .pre').css('visibility', 'hidden');
-		$('.thirteen.creationtime > .buttons > .button').removeClass('blue');
-		creationTime = null;
+		$('.creationtime > .buttons > .button').removeClass('blue');
 	};
+	
+	function contains(arr, obj) {
+		  var index = arr.length;
+		  while (index--) {
+		    if (arr[index] === obj) {
+		      return true;
+		    }
+		  }
+		  return false;
+		}
 });

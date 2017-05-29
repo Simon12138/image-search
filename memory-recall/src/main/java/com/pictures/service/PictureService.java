@@ -1,9 +1,11 @@
 package com.pictures.service;
 
+import java.io.IOException;
 import java.util.List;
 
 import com.pictures.controllers.dto.QueryParam;
 import com.pictures.entity.Picture;
+import com.pictures.projectoxford.face.rest.ClientException;
 
 public interface PictureService {
 	
@@ -25,5 +27,7 @@ public interface PictureService {
 	
 	public List<Picture> getPicturesByObject(String object);
 	
-	public List<Picture> queryPicture(QueryParam param);
+	public List<Picture> queryPictureMoreOneCue(QueryParam param) throws ClientException, IOException;
+	
+//	public List<Picture> queryPicture(QueryParam param);
 }

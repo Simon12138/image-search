@@ -110,8 +110,15 @@ public class HomeController {
 	@ResponseBody
 	public HttpEntity<Picture[]> query(@RequestBody QueryParam queryParam) {
 		// Start to query images using faceId, objectId and locationId
-		Picture[] pictures = pictureService.queryPicture(queryParam).toArray(new Picture[] {});
-		return new HttpEntity<Picture[]>(pictures);
+		try {
+			Picture[] pictures = pictureService.queryPictureMoreOneCue(queryParam).toArray(new Picture[] {});
+			return new HttpEntity<Picture[]>(pictures);
+		} catch (ClientException e) {
+			logger.error("You cannot connect to Microsoft Service: {0}", e);
+		} catch (IOException e) {
+			logger.error("IOException: {0}", e);
+		}
+		return new HttpEntity<Picture[]>(new Picture[] {});
 	}
 	
 	@RequestMapping(value="/images/download/{id}", method = RequestMethod.GET)

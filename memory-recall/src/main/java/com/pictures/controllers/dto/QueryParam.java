@@ -1,5 +1,7 @@
 package com.pictures.controllers.dto;
 
+import java.util.List;
+
 /*
  * This parameter type is using for query images:
  * faceId: Avatar image id
@@ -9,54 +11,43 @@ package com.pictures.controllers.dto;
 
 public class QueryParam {
 	
-	private Long faceId;
+	private List<Long> faceIds;
 	
-	private Long objectId;
+	private List<Long> objectIds;
 	
-	private Long locationId;
+	private List<Long> locationIds;
 	
-	private Double startHour;
-	
-	private Double endHour;
+	private List<Integer> times;
 
-	public Long getFaceId() {
-		return faceId;
+	public List<Long> getFaceIds() {
+		return faceIds;
 	}
 
-	public void setFaceId(Long faceId) {
-		this.faceId = faceId;
+	public void setFaceIds(List<Long> faceIds) {
+		this.faceIds = faceIds;
 	}
 
-	public Long getObjectId() {
-		return objectId;
+	public List<Long> getObjectIds() {
+		return objectIds;
 	}
 
-	public void setObjectId(Long objectId) {
-		this.objectId = objectId;
+	public void setObjectIds(List<Long> objectIds) {
+		this.objectIds = objectIds;
 	}
 
-	public Long getLocationId() {
-		return locationId;
+	public List<Long> getLocationIds() {
+		return locationIds;
 	}
 
-	public void setLocationId(Long locationId) {
-		this.locationId = locationId;
+	public void setLocationIds(List<Long> locationIds) {
+		this.locationIds = locationIds;
 	}
 
-	public Double getStartHour() {
-		return startHour;
+	public List<Integer> getTimes() {
+		return times;
 	}
 
-	public void setStartHour(Double startHour) {
-		this.startHour = startHour;
-	}
-
-	public Double getEndHour() {
-		return endHour;
-	}
-
-	public void setEndHour(Double endHour) {
-		this.endHour = endHour;
-	}
-	
+	public void setTimes(List<Integer> times) {
+		this.times = times;
+	}  
 }

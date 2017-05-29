@@ -17,7 +17,7 @@
 
 .main.container {
 	margin-top: 6em;
-	width: 75%!important;
+	width: 85%!important;
 	min-height: 700px!important;
 }
 
@@ -51,8 +51,16 @@
 	border-left: 1px solid #c1adad;
 }
 
-.ui.image {
+.ui.image.person {
 	margin: auto!important;
+}
+
+.ui.image.location {
+	margin: auto!important;
+}
+
+.image.cue {
+	margin: 0em -0.25em!important;
 }
 
 .image.person {
@@ -111,11 +119,19 @@
 	margin-right: 10%;
 }
 
-.recognization > .image.cue > .image{
+.recognization > .image.cue > .image.person{
 	margin-top: 40px!important;
 }
 
-.thirteen.creationtime > .buttons {
+.recognization > .image.cue > .image.location{
+	margin-top: 40px!important;
+}
+
+.recognization > .image.cue > .image.person{
+	margin-top: 40px!important;
+}
+
+.twelve.creationtime > .buttons {
 	margin-top: 10px!important;
 }
 
@@ -124,7 +140,43 @@
 	height: 100px!important;	
 }
 
-.ui.tiny.rounded.image.object {
+.ui.image.card.avatars {
+	margin-top: 10px;
 	width: 100px!important;
 	height: 100px!important;	
+}
+
+.ui.image.card.locations {
+	margin-top: 10px;
+	width: 100px!important;
+	height: 100px!important;	
+}
+
+.ui.tiny.rounded.image {
+	width: 100px!important;
+	height: 100px!important;	
+}
+
+.card.object {
+	width: 100px!important;
+}
+
+.card > .content {
+	padding: 0.5em 0.5em!important;
+}
+.cards.objects {
+	margin-top: 5px;
+}
+
+.rounded.image.object {
+	width: 100px!important;
+	height: 100px!important;
+}
+
+.ui.images.cue {
+	padding-top: 40px!important;;
+}
+
+.image.cue.creationtime {
+	padding-top: 40px!important;
 }
